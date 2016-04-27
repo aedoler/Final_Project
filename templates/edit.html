@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    h2 {
+    text-align: center
+    }
+</style>
 <body>
+<br>
+<h2>Apply changes below:</h2>
+<br>
+    <form name="/edit/<id>" align="center" action="POST">
+    <tr><th></th><textarea name="edit_blog" cols="100" rows="25">
+        {% for item in entries %}
+        {{ item.content }}
+        {% endfor %}
+    </textarea></th></tr><br>
+    <input type="submit" value="Submit Changes"/>
+</form>
+
 
 </body>
 </html>

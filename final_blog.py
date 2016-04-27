@@ -56,9 +56,20 @@ def dashboard():
         return redirect('/login')
     else:
         cur = g.db.execute('SELECT id, title, content, date FROM entries ORDER BY id')
-        entries = [dict(title=row[1], post_date=row[3]) for row in cur.fetchall()]
-        print entries
+        entries = [dict(id=row[0], title=row[1], post_date=row[3]) for row in cur.fetchall()]
+
         return render_template('dashboard.html', entries=entries)
+
+@app.route('/edit/<id>', methods = ['GET', 'POST'])
+def edit(id):
+    print id
+    if session['logged_in'] == False:
+        return redirect('/login')
+    else:
+        if request.method == 'GET':
+            cur = g.db.execute('SELECT id, title, content FROM entries WHERE id = ?', id)
+            entries = [dict(id=row[0], title=row[1], content=row[2]) for row in cur.fetchall()]
+            return render_template('edit.html', entries=entries)
 
 
 if __name__ == "__main__":

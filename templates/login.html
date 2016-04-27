@@ -8,8 +8,11 @@
 <style>
 h3 {
     color: red;
-    text-align: left;
+    text-align: center;
 }
+    h2 {
+    text-align: center;
+    }
 </style>
 
 <body>
@@ -18,8 +21,8 @@ h3 {
 {% if error %}<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
 </h3>
 
-<p>Please enter your username:</p>
-<form action = "/login" method="post">
+<center><p>Please enter your username:</p></center>
+<form align="center" action = "/login" method="post">
         Username:
     <input type="text" name="username"></input> <br>
         Password:
