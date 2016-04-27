@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+
+<style>
+h3 {
+    color: red;
+    text-align: left;
+}
+</style>
+
+<body>
+<h2>Login</h2>
+<h3>
+{% if error %}<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
+</h3>
+
+<p>Please enter your username:</p>
+<form action = "/login" method="post">
+        Username:
+    <input type="text" name="username"></input> <br>
+        Password:
+    <input type="text" name="password"></input> <br>
+    <input type="submit" value="Login"></input>
+</form>
+
+</body>
+</html>

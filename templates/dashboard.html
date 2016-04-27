@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Dashboard</title>
+</head>
+<body>
+
+<table align="center" name="students_table" style="width:50%" border="2">
+    <tr>
+    <th style="text-align: center" colspan="4">Students</th>
+    </tr>
+    <tr><th>Entry TItle</th><th>Date Posted</th><th>Action</th></tr>
+
+    {% for item in entries %}
+    <tr><td>{{ item.title }}</td><td>{{ item.post_date }}</td><td><a href="/edit/{{item.id}}">Edit Post</a>
+    <br><a href="/delete/{{item.id}}">Delete Post</a></td></tr>
+        {% endfor %}
+</table>
+
+</body>
+</html>
