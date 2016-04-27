@@ -70,6 +70,12 @@ def edit(id):
             cur = g.db.execute('SELECT id, title, content FROM entries WHERE id = ?', id)
             entries = [dict(id=row[0], title=row[1], content=row[2]) for row in cur.fetchall()]
             return render_template('edit.html', entries=entries)
+        elif request.method == 'POST':
+            g.db.execute('UPDATE entries SET content = ?, title = ? WHERE id = ?', [request.form['edit_blog'],
+                                                                                       request.form['blog_title'],
+                                                                                       id])
+            g.db.commit()
+            return redirect('/dashboard')
 
 
 if __name__ == "__main__":

@@ -12,13 +12,13 @@
 <body>
 <br>
 <h2>Apply changes below:</h2>
+
 <br>
-    <form name="/edit/<id>" align="center" action="POST">
-    <tr><th></th><textarea name="edit_blog" cols="100" rows="25">
-        {% for item in entries %}
-        {{ item.content }}
-        {% endfor %}
-    </textarea></th></tr><br>
+    <form name="/edit/<id>" align="center" method="POST">Title:<br>
+    <textarea type="text" name="blog_title" cols="50">{% for item in entries %}{{ item.title }}{% endfor %}</textarea>
+        <br>Content:<br>
+    <textarea name="edit_blog" cols="100" rows="25">{% for item in entries %}{{ item.content }}{% endfor %}
+    </textarea><br>
     <input type="submit" value="Submit Changes"/>
 </form>
 
