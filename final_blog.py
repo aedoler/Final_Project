@@ -1,8 +1,9 @@
 #!user/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, redirect, session, g, url_for, flash
+from flask import Flask, render_template, request, redirect, session, g, flash
 import sqlite3
+import datetime
 
 
 DATABASE = 'blog.db'
@@ -52,6 +53,7 @@ def login():
 
 @app.route('/dashboard', methods = ['GET'])
 def dashboard():
+    flash('You are now logged in!')
     if session['logged_in'] == False:
         return redirect('/login')
     else:
@@ -62,7 +64,6 @@ def dashboard():
 
 @app.route('/edit/<id>', methods = ['GET', 'POST'])
 def edit(id):
-    print id
     if session['logged_in'] == False:
         return redirect('/login')
     else:
@@ -76,6 +77,25 @@ def edit(id):
                                                                                        id])
             g.db.commit()
             return redirect('/dashboard')
+
+@app.route('/add', methods = ['GET', 'POST'])
+def add():
+    cur_date = datetime.date.today()
+    print cur_date
+    if session['logged_in'] == False:
+        return redirect('/login')
+    else:
+        if request.method == 'GET':
+            return render_template('add.html')
+
+    if request.method == 'POST':
+        cur = g.db.execute('INSERT INTO entries (title, content, date) VALUES (?, ?, ?)', [request.form['add_title'],
+                                                                                           request.form['add_content'],
+                                                                                           cur_date])
+        entries = [dict(id=row[0], title=row[1], content=row[2]) for row in cur.fetchall()]
+
+
+
 
 
 if __name__ == "__main__":
