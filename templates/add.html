@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add new post</title>
 </head>
 <style>
     h2 {
@@ -20,14 +20,13 @@
 
 <br>
 <div id="sidebar"><a href="/dashboard"><center>Dashboard</center></a></div>
-
-<h2>Apply changes below:</h2>
+<h2>Add new blog entry below!:</h2>
 
 <br>
-    <form name="/edit/<id>" align="center" method="POST">Title:<br>
-    <textarea type="text" name="blog_title" cols="50">{% for item in entries %}{{ item.title }}{% endfor %}</textarea>
+    <form name="/add" align="center" method="POST">Title:<br>
+    <textarea type="text" name="blog_title" cols="50">Type title here</textarea>
         <br>Content:<br>
-    <textarea name="edit_blog" cols="100" rows="25">{% for item in entries %}{{ item.content }}{% endfor %}
+    <textarea name="edit_blog" cols="100" rows="25">Type new blog post here
     </textarea><br>
     <input type="submit" value="Submit Changes"/>
 </form>

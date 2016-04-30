@@ -5,7 +5,25 @@
     <title>Blog Dashboard</title>
 </head>
 
+<style>
+    #sidebar {
+    width: 100px;
+    height: 700px;
+    background-color: AliceBlue;
+    float: left;
+}
+</style>
+
 <body>
+<div id="sidebar"><a href="/add"><center>Add New Post</center></a></div>
+
+{% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for message in messages %}
+         {{ message }}
+      {% endfor %}
+   {% endif %}
+{% endwith %}
 
 <table align="center" name="students_table" style="width:50%" border="2">
     <tr>
