@@ -15,7 +15,10 @@
 </style>
 
 <body>
-<div id="sidebar"><a href="/add"><center>Add New Post</center></a></div>
+<div id="sidebar">
+    <a href="/add"><center>Add New Post</center><br></a>
+    <a href="/view_blogs"><center>View Blog (All Entries)</center></a>
+</div>
 
 {% with messages = get_flashed_messages() %}
    {% if messages %}
@@ -27,7 +30,7 @@
 
 <table align="center" name="students_table" style="width:50%" border="2">
     <tr>
-    <th style="text-align: center" colspan="4">Students</th>
+    <th style="text-align: center" colspan="4">Blog Dashboard</th>
     </tr>
     <tr><th>Entry Title</th><th>Date Posted</th><th>Action</th></tr>
 

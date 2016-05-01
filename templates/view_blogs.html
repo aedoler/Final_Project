@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View All Blogs</title>
+</head>
+<style>
+    #sidebar {
+    width: 100px;
+    height: 700px;
+    background-color: AliceBlue;
+    float: left;
+}
+</style>
+<body style="background-color:black;">
+
+<div id="sidebar">
+    <a href="/add"><center>Add New Post</center><br></a>
+    <a href="/dashboard"><center>Dashboard</center></a>
+</div>
+
+<table style="background-color:lightgrey;" align='center' name='all_blogs' style="width=200%" border="4">
+    <col width="400">
+    {% for item in entries %}
+    <tr><th><b>
+       {{ item.title }}
+    </b></th>
+    <th>
+        Posted on: {{ item.date }}
+    </th></tr>
+    <tr><td colspan="2" style="text-align:left;vertical-align:top;padding:1"  height="350">
+        {{ item.content }}
+    </td></tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

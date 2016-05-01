@@ -3,7 +3,7 @@
 
 from flask import Flask, render_template, request, redirect, session, g, flash
 import sqlite3
-import datetime
+import time
 
 
 DATABASE = 'blog.db'
@@ -80,8 +80,7 @@ def edit(id):
 
 @app.route('/add', methods = ['GET', 'POST'])
 def add():
-    cur_date = datetime.date.today()
-    print cur_date
+    cur_date = time.strftime("%c")
     if session['logged_in'] == False:
         return redirect('/login')
     else:
@@ -89,10 +88,27 @@ def add():
             return render_template('add.html')
 
     if request.method == 'POST':
-        cur = g.db.execute('INSERT INTO entries (title, content, date) VALUES (?, ?, ?)', [request.form['add_title'],
+        g.db.execute('INSERT INTO entries (title, content, date) VALUES (?, ?, ?)', [request.form['add_title'],
                                                                                            request.form['add_content'],
                                                                                            cur_date])
-        entries = [dict(id=row[0], title=row[1], content=row[2]) for row in cur.fetchall()]
+        g.db.commit()
+        return redirect('/dashboard')
+
+@app.route('/view_blogs', methods = ['GET'])
+def view_blogs():
+    if session['logged_in'] == False:
+        return redirect('/login')
+    cur = g.db.execute('SELECT id, title, content, date FROM entries ORDER BY date ASC, id ASC')
+    entries = [dict(id=row[0], title=row[1], content=row[2], date=row[3]) for row in cur.fetchall()]
+
+    return render_template('view_blogs.html', entries = entries)
+
+
+@app.route('/delete', methods = ['POST'])
+def delete():
+    print 'Delete page'
+
+
 
 
 
