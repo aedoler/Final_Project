@@ -98,15 +98,19 @@ def add():
 def view_blogs():
     if session['logged_in'] == False:
         return redirect('/login')
-    cur = g.db.execute('SELECT id, title, content, date FROM entries ORDER BY date ASC, id ASC')
+    cur = g.db.execute('SELECT id, title, content, date FROM entries ORDER BY date DESC')
     entries = [dict(id=row[0], title=row[1], content=row[2], date=row[3]) for row in cur.fetchall()]
 
     return render_template('view_blogs.html', entries = entries)
 
 
-@app.route('/delete', methods = ['POST'])
-def delete():
-    print 'Delete page'
+@app.route('/delete/<id>', methods = ['GET', 'POST'])
+def delete(id):
+    if request.method == 'POST':
+        g.db.execute('DELETE FROM entries WHERE id = ?', id)
+        g.db.commit()
+    return redirect('/dashboard')
+
 
 
 
