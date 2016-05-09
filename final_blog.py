@@ -98,7 +98,7 @@ def add():
 def view_blogs():
     if session['logged_in'] == False:
         return redirect('/login')
-    cur = g.db.execute('SELECT id, title, content, date FROM entries ORDER BY date DESC')
+    cur = g.db.execute('SELECT id, title, content, date FROM entries ORDER BY date ASC') # View blog with newest posts on top
     entries = [dict(id=row[0], title=row[1], content=row[2], date=row[3]) for row in cur.fetchall()]
 
     return render_template('view_blogs.html', entries = entries)
