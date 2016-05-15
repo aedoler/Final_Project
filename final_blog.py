@@ -68,7 +68,7 @@ def edit(id):
         return redirect('/login')
     else:
         if request.method == 'GET':
-            cur = g.db.execute('SELECT id, title, content FROM entries WHERE id = ?', id)
+            cur = g.db.execute('SELECT id, title, content FROM entries WHERE id = ?', (id,))
             entries = [dict(id=row[0], title=row[1], content=row[2]) for row in cur.fetchall()]
             return render_template('edit.html', entries=entries)
         elif request.method == 'POST':
@@ -107,7 +107,7 @@ def view_blogs():
 @app.route('/delete/<id>', methods = ['GET', 'POST'])
 def delete(id):
     if request.method == 'POST':
-        g.db.execute('DELETE FROM entries WHERE id = ?', id)
+        g.db.execute('DELETE FROM entries WHERE id = ?', (id,))
         g.db.commit()
     return redirect('/dashboard')
 

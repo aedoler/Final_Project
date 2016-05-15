@@ -21,14 +21,16 @@ h3 {
 {% if error %}<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
 </h3>
 
+<fieldset>
+    <legend>Enter your login information below</legend>
 <center><p>Please enter your username:</p></center>
 <form align="center" action = "/login" method="post">
         Username:
     <input type="text" name="username"></input> <br>
         Password:
-    <input type="text" name="password"></input> <br>
+    <input type="password" name="password"></input> <br>
     <input type="submit" value="Login"></input>
-</form>
+</form></fieldset>
 
 </body>
 </html>
